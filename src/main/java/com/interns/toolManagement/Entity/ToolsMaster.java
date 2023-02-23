@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "toolsMaster")
-public class toolsMaster {
+@Table(name = "ToolsMaster")
+public class ToolsMaster {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long toolId;
