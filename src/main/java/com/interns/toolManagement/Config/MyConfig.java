@@ -50,12 +50,13 @@ public class MyConfig {
         http.
                 csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/Tools/**")
+                .requestMatchers("/Tools/**","/user/**","/ToolObjects/**","/events/**")
                 .permitAll()
-                .requestMatchers("/user/**")
-                .hasRole("USER")
+//                .requestMatchers("/user/**")
+//                .hasRole("USER")
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginProcessingUrl("/user/sign");
 
         http.authenticationProvider(daoauthenticationProvider());
         return http.build();

@@ -1,6 +1,5 @@
 package com.interns.toolManagement.Controller;
 
-import com.interns.toolManagement.Entity.ToolsMaster;
 import com.interns.toolManagement.Entity.User;
 import com.interns.toolManagement.Service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,13 @@ public class UserController {
     @PostMapping("/register")
     public User registerUsers(@RequestBody User user){
         return userService.addUser(user);
+
+    }
+
+    @PostMapping("/sign")
+    public String login(String username){
+        userService.loadUserByUsername(username);
+        return "Success";
 
     }
  //<----for testing routing using auth--->

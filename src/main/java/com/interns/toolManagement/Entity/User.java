@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +25,9 @@ public class User {
     private String password;
     private String role;
     private boolean active;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<Events> events;
 
-    //provide mapping to events table
 
 
 }
