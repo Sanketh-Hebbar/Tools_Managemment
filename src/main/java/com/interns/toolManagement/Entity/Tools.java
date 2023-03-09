@@ -31,6 +31,7 @@ public class Tools {
     @ManyToOne
     @JoinColumn(name = "fk_tool_id")
     private Master master;
-    @OneToOne(mappedBy = "tool",cascade = CascadeType.ALL)
-    private Events events;
+//    @OneToOne(mappedBy = "tool",cascade = CascadeType.ALL)
+//    private Events events; commented out
+
 }

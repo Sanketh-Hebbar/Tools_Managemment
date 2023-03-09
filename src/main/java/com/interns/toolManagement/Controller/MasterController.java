@@ -28,7 +28,7 @@ public class MasterController {
     public Master updateTool(@PathVariable Long id, @RequestBody Master tool){
         return service.updateTool(id, tool);
     }
-    
+
     @DeleteMapping("/removeTool/{id}")
     public String remove(@PathVariable Long id){
         return service.deleteTool(id);
