@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Master")
+@DynamicInsert
+@DynamicUpdate
 public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +25,5 @@ public class Master {
     private String toolName;
     private int quantity;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "master")
-    private List<Tools> tools;
 
 }
