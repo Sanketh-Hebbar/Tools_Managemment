@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,6 +15,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "Events")
+
+@DynamicInsert
+@DynamicUpdate
 public class Events {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
