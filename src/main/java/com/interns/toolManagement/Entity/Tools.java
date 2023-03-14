@@ -32,6 +32,6 @@ public class Tools {
     @JoinColumn(name = "fk_tool_id")
     private Master master;
 //    @OneToOne(mappedBy = "tool",cascade = CascadeType.ALL)
-//    private Events events; commented out
+//    private Events events;
 
 }

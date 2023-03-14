@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Tools")
+@RequestMapping("/api")
 public class MasterController {
 
     @Autowired
