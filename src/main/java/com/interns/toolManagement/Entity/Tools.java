@@ -17,7 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 public class Tools {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tool_object_Id;
     private String manufacturer;
     private double max_usage_capacity;
@@ -31,7 +31,10 @@ public class Tools {
     @ManyToOne
     @JoinColumn(name = "fk_tool_id")
     private Master master;
-//    @OneToOne(mappedBy = "tool",cascade = CascadeType.ALL)
-//    private Events events;
+
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private User user;
+
 
 }

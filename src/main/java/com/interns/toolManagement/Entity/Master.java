@@ -19,7 +19,7 @@ import java.util.List;
 @DynamicUpdate
 public class Master {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long toolId;
     private String toolName;
