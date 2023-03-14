@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @DynamicUpdate
 public class Events {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
     @ManyToOne
     @JoinColumn(name = "fk_user_id")
