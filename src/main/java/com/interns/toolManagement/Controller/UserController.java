@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
