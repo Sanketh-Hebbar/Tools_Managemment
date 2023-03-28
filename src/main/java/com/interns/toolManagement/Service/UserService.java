@@ -12,21 +12,28 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Object validateUserLogin(String userName, String password ) {
+
+    public User validateUserLogin(String userName, String password ) {
 
 
         User foundUser = userRepository.findByNameAndPassword(userName, password);
         // if the user does not exist
         if (foundUser == null) {
-            return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+
+
+            return null;
         }
-        // If the user exist then display all the tools owned by him
+        // If the user
         else
         {
 
-            return userRepository.getUserOwnedTools(foundUser.getId());
+            return foundUser;
+
         }
 
 
+    }
+    public Object findUserTools(Long userId){
+        return userRepository.getUserOwnedTools(userId);
     }
 }
