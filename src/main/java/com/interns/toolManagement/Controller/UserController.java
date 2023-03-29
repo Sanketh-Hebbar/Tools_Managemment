@@ -1,6 +1,7 @@
 package com.interns.toolManagement.Controller;
 
 import com.interns.toolManagement.Entity.Master;
+import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.User;
 import com.interns.toolManagement.Service.EventsService;
 import com.interns.toolManagement.Service.MasterService;
@@ -70,6 +71,17 @@ public class UserController {
 
 
     }
-//
+
+    @PostMapping("/addnotification")
+    public Notifications addNotification(@RequestBody Notifications notifications){
+        return userService.addRequest(notifications);
+    }
+
+    @GetMapping("/shownotifications")
+    public List<Notifications> showNotifications(){
+        return userService.showNotifications();
+    }
+
+
 
 }

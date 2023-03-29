@@ -1,5 +1,6 @@
 package com.interns.toolManagement.Repository;
 
+import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
