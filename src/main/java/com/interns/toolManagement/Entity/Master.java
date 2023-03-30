@@ -20,7 +20,6 @@ import java.util.List;
 public class Master {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long toolId;
     private String toolName;
     private int quantity;

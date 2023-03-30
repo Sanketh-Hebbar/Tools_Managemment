@@ -58,10 +58,6 @@ public class UserService {
         return notificationsRepo.save(notifications);
     }
 
-
-
-
-
 //    notification.setNotificationID(notifications.getNotificationID());
 //        notification.setMaster(notifications.getMaster());
 //        notification.setToolName(notifications.getToolName());
@@ -72,18 +68,21 @@ public class UserService {
 //        return notification;
 
 
-
-
-
     //Showing all the notifications for the toolManager
     public List<Notifications> showNotifications(){
 
-        return notificationsRepo.findAll();
+        return notificationsRepo.findByStatus(false);
+//        return  notificationsRepo.findAll();
     }
 
     //tool manager approves or rejects the request
     public String approveRequest(){
         return "done";
+    }
+
+    public String rejectRequest(Long notificationID){
+        notificationsRepo.deleteById(notificationID);
+        return "Notification deleted";
     }
 
 }

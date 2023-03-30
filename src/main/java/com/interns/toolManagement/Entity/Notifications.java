@@ -29,6 +29,7 @@ public class Notifications {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private String manufacturer;
 
     private int quantity;
 
