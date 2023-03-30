@@ -7,7 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MasterRepo extends JpaRepository<Master, Long> {
-//    @Query("select m.toolId,m.toolName,m.quantity from Master m")
-//    public List<Object[]> getAllToolsUsingJPQL();
 
 }
