@@ -22,4 +22,9 @@ public class ToolsController {
     public List<Tools> fetchToolObjects(){
         return toolsService.getToolObjects();
     }
+
+    @GetMapping("/getToolObjectsByToolId/{masterId}")
+    public Object getToolObjectsByToolId(@PathVariable Long masterId){
+        return toolsService.getToolObjectsByToolId(masterId);
+    }
 }
