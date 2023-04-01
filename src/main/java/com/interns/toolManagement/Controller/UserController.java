@@ -19,6 +19,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -42,6 +43,8 @@ public class UserController {
 
             HashMap<String,String> userRole=new HashMap<>();
             userRole.put("userRole",foundUser.getRole());
+            userRole.put("userId",foundUser.getId().toString());
+            userRole.put("userName",foundUser.getName());
             // if the client is the user
             if (foundUser.getRole().equals("user")) {
 
@@ -62,10 +65,15 @@ public class UserController {
                 return  masterTools;
             }
             // if the role of the client is tool Manager return the tools table
-            ArrayList<Object> toolsTable=new ArrayList<>(toolsService.getToolObjects());
-            toolsTable.add(userRole);
 
-            return toolsTable;
+//            ArrayList<Object> toolsTable=new ArrayList<>(toolsService.getToolObjects());
+//            toolsTable.add(userRole);
+//
+//            return toolsTable;
+
+            ArrayList<Object> masterTools=new ArrayList<>(masterService.getTools());
+            masterTools.add(userRole);
+            return  masterTools;
         }
 
 
