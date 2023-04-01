@@ -1,6 +1,7 @@
 package com.interns.toolManagement.Controller;
 
 import com.interns.toolManagement.Entity.Master;
+import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.User;
 import com.interns.toolManagement.Service.EventsService;
 import com.interns.toolManagement.Service.MasterService;
@@ -76,8 +77,23 @@ public class UserController {
             return  masterTools;
         }
 
-
     }
-//
+
+    @PostMapping("/addNotification")
+    public Notifications addNotification(@RequestBody Notifications notifications){
+        return userService.addRequest(notifications);
+    }
+
+    //Showing all the notifications for the toolManager
+    @GetMapping("/showNotifications")
+    public List<Notifications> showNotifications(){
+        return userService.showNotifications();
+    }
+
+    //When toolManager rejects the user request
+    @DeleteMapping("/deleteNotification/{notificationId}")
+    public String rejectRequest(@PathVariable Long notificationId){
+        return userService.rejectRequest(notificationId);
+    }
 
 }

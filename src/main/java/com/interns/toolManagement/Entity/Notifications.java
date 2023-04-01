@@ -7,22 +7,32 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.List;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Master")
+@Table(name = "Notifications")
+
 @DynamicInsert
 @DynamicUpdate
-public class Master {
+public class Notifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long toolId;
+    private Long notificationID;
+
+    @ManyToOne
+    @JoinColumn(name = "master_tool_id")
+    private Master master;
+
     private String toolName;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String manufacturer;
+
     private int quantity;
 
+    private boolean status;
 
 }

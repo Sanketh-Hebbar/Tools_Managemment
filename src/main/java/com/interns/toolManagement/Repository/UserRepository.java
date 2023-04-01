@@ -1,5 +1,6 @@
 package com.interns.toolManagement.Repository;
 
+import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +18,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT t FROM Tools t JOIN t.master m WHERE t.user.id = :id")
     public ArrayList<Object> getUserOwnedTools(@Param("id") Long userId);
+
+
 
 
 
