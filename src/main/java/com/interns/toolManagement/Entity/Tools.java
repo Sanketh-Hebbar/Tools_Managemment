@@ -36,5 +36,8 @@ public class Tools {
     @JoinColumn(name="userId")
     private User user;
 
+    @Transient
+    private int quantity;
+
 
 }
