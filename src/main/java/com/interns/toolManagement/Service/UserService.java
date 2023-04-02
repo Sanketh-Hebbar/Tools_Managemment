@@ -1,17 +1,16 @@
 package com.interns.toolManagement.Service;
 
 import com.interns.toolManagement.Entity.Notifications;
+import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
 import com.interns.toolManagement.Repository.NotificationsRepo;
+import com.interns.toolManagement.Repository.ToolsRepo;
 import com.interns.toolManagement.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Service
@@ -22,6 +21,9 @@ public class UserService {
 
     @Autowired
     private NotificationsRepo notificationsRepo;
+
+    @Autowired
+    private ToolsRepo toolsRepo;
 
 
     public User validateUserLogin(String userName, String password ) {
@@ -76,8 +78,19 @@ public class UserService {
     }
 
     //tool manager approves or rejects the request
-    public String approveRequest(){
-        return "done";
+    public Tools approveRequest(Tools tools){
+        Notifications notifications=notificationsRepo.findByMasterAndUser(tools.getMaster(),tools.getUser());
+        notifications.setStatus(true);
+        notificationsRepo.save(notifications);
+        int i=0;
+        int quantity=tools.getQuantity();
+        while(i<quantity){
+            tools.setTool_object_Id(0L);
+            toolsRepo.save(tools);
+            i++;
+        }
+        return tools;
+
     }
 
     public String rejectRequest(Long notificationID){
@@ -86,3 +99,14 @@ public class UserService {
     }
 
 }
+
+
+
+
+
+//            tool.setManufacturer(notifications.getManufacturer());
+//            tool.setMax_usage_capacity(notifications.getMax_usage_capacity());
+//            tool.setNo_of_times_used(notifications.getNo_of_times_used());
+//            tool.setPrice(notifications.getPrice());
+//            tool.setUser(notifications.getUser());
+//            tool.setMaster(notifications.getMaster());

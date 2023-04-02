@@ -34,5 +34,6 @@ public class Notifications {
     private int quantity;
 
     private boolean status;
+    
 
 }
