@@ -2,6 +2,7 @@ package com.interns.toolManagement.Controller;
 
 import com.interns.toolManagement.Entity.Master;
 import com.interns.toolManagement.Entity.Notifications;
+import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
 import com.interns.toolManagement.Service.EventsService;
 import com.interns.toolManagement.Service.MasterService;
@@ -88,6 +89,12 @@ public class UserController {
     @GetMapping("/showNotifications")
     public List<Notifications> showNotifications(){
         return userService.showNotifications();
+    }
+
+    //When toolManager approves the user request
+    @PostMapping("/approveRequest")
+    public Tools approveRequest(@RequestBody Tools tools){
+        return userService.approveRequest(tools);
     }
 
     //When toolManager rejects the user request
