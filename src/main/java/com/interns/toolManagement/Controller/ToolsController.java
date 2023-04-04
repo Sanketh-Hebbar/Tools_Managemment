@@ -23,7 +23,7 @@ public class ToolsController {
     public List<Tools> fetchToolObjects(){
         return toolsService.getToolObjects();
     }
-
+    // For getting the sub Tables on clicking the Master Table for Tool Manager
     @GetMapping("/getToolObjectsByToolId/{masterId}")
     public Object getToolObjectsByToolId(@PathVariable Long masterId){
         return toolsService.getToolObjectsByToolId(masterId);
