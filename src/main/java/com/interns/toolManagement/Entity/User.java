@@ -28,7 +28,9 @@ public class User {
     private String email;
     private String password;
     private String role;
-    private boolean active;
+
+
+//    private boolean active;
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
 //    private List<Events> events;
 
