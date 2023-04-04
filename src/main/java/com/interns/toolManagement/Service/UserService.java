@@ -79,9 +79,11 @@ public class UserService {
 
     //tool manager approves or rejects the request
     public Tools approveRequest(Tools tools){
-        Notifications notifications=notificationsRepo.findByMasterAndUser(tools.getMaster(),tools.getUser());
-        notifications.setStatus(true);
-        notificationsRepo.save(notifications);
+        List<Notifications> notificationsList = notificationsRepo.findByMasterAndUser(tools.getMaster(), tools.getUser());
+        for (Notifications notifications : notificationsList) {
+            notifications.setStatus(true);
+            notificationsRepo.save(notifications);
+        }
         int i=0;
         int quantity=tools.getQuantity();
         while(i<quantity){
