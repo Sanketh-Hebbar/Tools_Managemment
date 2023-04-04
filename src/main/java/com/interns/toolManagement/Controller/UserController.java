@@ -30,6 +30,11 @@ public class UserController {
     @Autowired
     private EventsService eventsService;
 
+    @PostMapping("/registerUser")
+    public User registerUser(@RequestBody User user){
+        return userService.registerUser(user);
+    }
+
 
     @PostMapping("/login")
     public Object validateLogin(@RequestBody HashMap<String, Object> userDetails) {
@@ -58,11 +63,7 @@ public class UserController {
             // If the role of the client is admin return the master table
             else if (foundUser.getRole().equals("admin")) {
                 ArrayList<Object> masterTools=new ArrayList<>(masterService.getTools());
-
-
-
                 masterTools.add(userRole);
-
                 return  masterTools;
             }
             // if the role of the client is tool Manager return the tools table
