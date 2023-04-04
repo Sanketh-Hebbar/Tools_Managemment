@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.ArrayList;
 
 public interface ToolsRepo extends JpaRepository<Tools,Long> {
+
     @Query("SELECT t FROM Tools t WHERE t.master.toolId = :toolId")
     public ArrayList<Object> getToolObjectsByToolId(@Param("toolId") Long masterId);
+
 }

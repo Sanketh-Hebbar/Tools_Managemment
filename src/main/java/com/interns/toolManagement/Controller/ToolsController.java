@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ToolObjects")
 public class ToolsController {
     @Autowired
@@ -22,7 +23,7 @@ public class ToolsController {
     public List<Tools> fetchToolObjects(){
         return toolsService.getToolObjects();
     }
-
+    // For getting the sub Tables on clicking the Master Table for Tool Manager
     @GetMapping("/getToolObjectsByToolId/{masterId}")
     public Object getToolObjectsByToolId(@PathVariable Long masterId){
         return toolsService.getToolObjectsByToolId(masterId);
