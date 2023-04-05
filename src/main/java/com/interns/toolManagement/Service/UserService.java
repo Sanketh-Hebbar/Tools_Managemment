@@ -30,10 +30,10 @@ public class UserService {
     }
 
 
-    public User validateUserLogin(String userName, String password ) {
+    public User validateUserLogin(String email, String password ) {
 
 
-        User foundUser = userRepository.findByNameAndPassword(userName, password);
+        User foundUser = userRepository.findByEmailAndPassword( email , password);
         // if the user does not exist
         if (foundUser == null) {
 

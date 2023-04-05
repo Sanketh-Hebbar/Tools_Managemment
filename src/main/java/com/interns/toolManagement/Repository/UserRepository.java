@@ -14,7 +14,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User,Long> {
 
 
-    public User findByNameAndPassword(String name, String password);
+    public User findByEmailAndPassword(String email, String password);
 
     @Query("SELECT t FROM Tools t JOIN t.master m WHERE t.user.id = :id")
     public ArrayList<Object> getUserOwnedTools(@Param("id") Long userId);
