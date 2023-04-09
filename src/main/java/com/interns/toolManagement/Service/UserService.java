@@ -1,8 +1,10 @@
 package com.interns.toolManagement.Service;
 
+import com.interns.toolManagement.Entity.Master;
 import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
+import com.interns.toolManagement.Repository.MasterRepo;
 import com.interns.toolManagement.Repository.NotificationsRepo;
 import com.interns.toolManagement.Repository.ToolsRepo;
 import com.interns.toolManagement.Repository.UserRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -24,6 +27,9 @@ public class UserService {
 
     @Autowired
     private ToolsRepo toolsRepo;
+
+    @Autowired
+    private MasterRepo masterRepo;
 
     public User registerUser(User user){
         return userRepository.save(user);
@@ -64,14 +70,7 @@ public class UserService {
         return notificationsRepo.save(notifications);
     }
 
-//    notification.setNotificationID(notifications.getNotificationID());
-//        notification.setMaster(notifications.getMaster());
-//        notification.setToolName(notifications.getToolName());
-//        notification.setUser(notifications.getUser());
-//        notification.setQuantity(notifications.getQuantity());
-//        notification.setStatus(false);
-//
-//        return notification;
+
 
 
     //Showing all the notifications for the toolManager
@@ -95,8 +94,33 @@ public class UserService {
             toolsRepo.save(tools);
             i++;
         }
+
+        //gets the master id to update
+        Long masterId=tools.getMaster().getToolId();
+
+        int masterQuantity= masterRepo.findQuantityByToolId(masterId);
+        int remainingQuantity=masterQuantity-quantity;
+
+        if(remainingQuantity>0) {
+            updateMasterQuantity(masterId, remainingQuantity);
+        }else {
+            System.out.println("Remaining quantity is less than 0");
+        }
+
+
         return tools;
 
+    }
+
+    public void updateMasterQuantity(Long masterId, int remainingQuantity) {
+        Optional<Master> masterOptional = masterRepo.findById(masterId);
+        if (masterOptional.isPresent()) {
+            Master master = masterOptional.get();
+            master.setQuantity(remainingQuantity);
+            masterRepo.save(master);
+        } else {
+            System.out.println("Master object with the given ID does not exist");
+        }
     }
 
     public String rejectRequest(Long notificationID){
@@ -109,10 +133,3 @@ public class UserService {
 
 
 
-
-//            tool.setManufacturer(notifications.getManufacturer());
-//            tool.setMax_usage_capacity(notifications.getMax_usage_capacity());
-//            tool.setNo_of_times_used(notifications.getNo_of_times_used());
-//            tool.setPrice(notifications.getPrice());
-//            tool.setUser(notifications.getUser());
-//            tool.setMaster(notifications.getMaster());
