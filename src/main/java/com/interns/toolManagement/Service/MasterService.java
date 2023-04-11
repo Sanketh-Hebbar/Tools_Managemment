@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MasterService {
@@ -28,12 +29,21 @@ public class MasterService {
         return repository.save(existingTool);
     }
 
+    //to update existing master tool quantity
+    public void updateExistingToolQuantity(Long id,int quantity){
+        Optional<Master> masterOptional = repository.findById(id);
+        if (masterOptional.isPresent()) {
+            Master master = masterOptional.get();
+            master.setQuantity(quantity);
+            repository.save(master);
+        } else {
+            System.out.println("Master tool with the given ID does not exist");
+        }
+    }
+
     public String deleteTool(Long id){
         repository.deleteById(id);
         return "Tool:"+id+" removed";
     }
-
-
-
 
 }

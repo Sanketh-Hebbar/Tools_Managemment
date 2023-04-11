@@ -119,7 +119,7 @@ public class UserService {
             master.setQuantity(remainingQuantity);
             masterRepo.save(master);
         } else {
-            System.out.println("Master object with the given ID does not exist");
+            System.out.println("Master tool with the given ID does not exist");
         }
     }
 
