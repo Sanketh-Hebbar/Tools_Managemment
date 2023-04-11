@@ -23,10 +23,10 @@ public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
     @ManyToOne
-    @JoinColumn(name = "fk_user_id")
+    @JoinColumn(name = "userId")
     private User user; //user id
     @OneToOne
-    @JoinColumn(name = "fk_tool_object_id")
+    @JoinColumn(name = "toolObjectId")
     private Tools tool;  // tool_object_id
 
     private LocalDate dateAccepted;

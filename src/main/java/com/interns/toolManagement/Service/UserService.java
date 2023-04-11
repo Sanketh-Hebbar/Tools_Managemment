@@ -32,6 +32,7 @@ public class UserService {
     private MasterRepo masterRepo;
 
     public User registerUser(User user){
+        user.setIsblocked(false);
         return userRepository.save(user);
     }
 
@@ -47,6 +48,9 @@ public class UserService {
             return null;
         }
         // If the user
+        else if(foundUser.isIsblocked()){
+            return null;
+        }
         else
         {
 

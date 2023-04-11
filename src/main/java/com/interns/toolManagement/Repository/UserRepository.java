@@ -20,7 +20,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     public ArrayList<Object> getUserOwnedTools(@Param("id") Long userId);
 
 
-
-
-
+    public List<User> findByRoleIn(List<String> asList);
 }

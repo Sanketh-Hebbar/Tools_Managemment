@@ -29,6 +29,8 @@ public class User {
     private String password;
     private String role;
 
+    private boolean isblocked;
+
 
 //    private boolean active;
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
