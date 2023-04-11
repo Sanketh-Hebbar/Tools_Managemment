@@ -10,4 +10,5 @@ import java.util.List;
 public interface NotificationsRepo extends JpaRepository<Notifications,Long> {
     public List<Notifications> findByStatus(boolean status);
     public List<Notifications> findByMasterAndUser(Master master, User user);
+    public void deleteByUserId(Long id);
 }

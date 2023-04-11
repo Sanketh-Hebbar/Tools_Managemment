@@ -12,4 +12,5 @@ public interface ToolsRepo extends JpaRepository<Tools,Long> {
     @Query("SELECT t FROM Tools t WHERE t.master.toolId = :toolId")
     public ArrayList<Object> getToolObjectsByToolId(@Param("toolId") Long masterId);
 
+    public void deleteByUserId(Long id);
 }
