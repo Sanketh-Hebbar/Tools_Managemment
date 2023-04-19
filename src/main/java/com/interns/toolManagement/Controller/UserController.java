@@ -96,7 +96,7 @@ public class UserController {
     @PostMapping("/approveRequest")
     public Tools approveRequest(@RequestBody Tools tools){
         Tools result=userService.approveRequest(tools);
-        userService.logEventApprove(tools);
+        userService.logEvent(tools,"approved");
         return result;
     }
 
@@ -104,7 +104,7 @@ public class UserController {
     @DeleteMapping("/deleteNotification/{notificationId}")
     public String rejectRequest(@PathVariable Long notificationId,@RequestBody Tools tools){
         userService.rejectRequest(notificationId);
-        userService.logEventDecline(tools);
+        userService.logEvent(tools,"declined");
         return "Notification deleted";
     }
 

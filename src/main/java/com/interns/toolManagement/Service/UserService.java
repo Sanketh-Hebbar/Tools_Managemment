@@ -127,7 +127,8 @@ public class UserService {
         }
     }
 
-    public void logEventApprove(Tools tools){
+
+    public void logEvent(Tools tools,String approvalStatus){
         Events events=new Events();
         events.setUser(tools.getUser());
 
@@ -142,28 +143,7 @@ public class UserService {
 
         events.setDateAccepted(LocalDateTime.now());
 
-        events.setApproval("approved");
-
-        eventsRepo.save(events);
-
-    }
-
-    public void logEventDecline(Tools tools){
-        Events events=new Events();
-        events.setUser(tools.getUser());
-
-        Tuple tuple = userRepository.findNameById(tools.getUser().getId());
-        String userName = tuple.get(1, String.class);
-        events.setUserName(userName);
-
-        String toolName = masterRepo.findToolNameByToolId(tools.getMaster().getToolId());
-        events.setToolName(toolName);
-
-        events.setQuantity(tools.getQuantity());
-
-        events.setDateAccepted(LocalDateTime.now());
-
-        events.setApproval("declined");
+        events.setApproval(approvalStatus);
 
         eventsRepo.save(events);
     }
