@@ -10,4 +10,7 @@ import java.util.List;
 public interface MasterRepo extends JpaRepository<Master, Long> {
     @Query("SELECT m.quantity FROM Master m WHERE m.toolId = :toolId")
     int findQuantityByToolId(@Param("toolId") Long toolId);
+
+    @Query("SELECT m.toolName FROM Master m WHERE m.toolId = :id")
+    String findToolNameByToolId(@Param("id") Long id);
 }

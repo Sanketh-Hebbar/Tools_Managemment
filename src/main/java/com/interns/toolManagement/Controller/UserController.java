@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -95,13 +95,17 @@ public class UserController {
     //When toolManager approves the user request
     @PostMapping("/approveRequest")
     public Tools approveRequest(@RequestBody Tools tools){
-        return userService.approveRequest(tools);
+        Tools result=userService.approveRequest(tools);
+        userService.logEventApprove(tools);
+        return result;
     }
 
     //When toolManager rejects the user request
     @DeleteMapping("/deleteNotification/{notificationId}")
-    public String rejectRequest(@PathVariable Long notificationId){
-        return userService.rejectRequest(notificationId);
+    public String rejectRequest(@PathVariable Long notificationId,@RequestBody Tools tools){
+        userService.rejectRequest(notificationId);
+        userService.logEventDecline(tools);
+        return "Notification deleted";
     }
 
 }
