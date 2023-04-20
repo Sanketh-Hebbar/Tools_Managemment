@@ -1,8 +1,10 @@
 package com.interns.toolManagement.Repository;
 
+import com.interns.toolManagement.Entity.Master;
 import com.interns.toolManagement.Entity.Notifications;
 import com.interns.toolManagement.Entity.Tools;
 import com.interns.toolManagement.Entity.User;
+import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,4 +23,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 
     public List<User> findByRoleIn(List<String> asList);
+    @Query("SELECT u.id, u.name FROM User u WHERE u.id = :id")
+    Tuple findNameById(@Param("id") Long id);
+
 }

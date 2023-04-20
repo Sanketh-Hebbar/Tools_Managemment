@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -25,12 +26,15 @@ public class Events {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user; //user id
-    @OneToOne
-    @JoinColumn(name = "toolObjectId")
-    private Tools tool;  // tool_object_id
+    private String userName;
+    private String toolName;
 
-    private LocalDate dateAccepted;
-    private LocalDate dateReturned;
+    private int quantity;
+//    @OneToOne
+//    @JoinColumn(name = "toolObjectId")
+//    private Tools tool;  // tool_object_id
 
+    private LocalDateTime dateAccepted;
+    private String approval;
 
 }

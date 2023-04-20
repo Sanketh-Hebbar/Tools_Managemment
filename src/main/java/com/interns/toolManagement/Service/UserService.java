@@ -1,15 +1,11 @@
 package com.interns.toolManagement.Service;
 
-import com.interns.toolManagement.Entity.Master;
-import com.interns.toolManagement.Entity.Notifications;
-import com.interns.toolManagement.Entity.Tools;
-import com.interns.toolManagement.Entity.User;
-import com.interns.toolManagement.Repository.MasterRepo;
-import com.interns.toolManagement.Repository.NotificationsRepo;
-import com.interns.toolManagement.Repository.ToolsRepo;
-import com.interns.toolManagement.Repository.UserRepository;
+import com.interns.toolManagement.Entity.*;
+import com.interns.toolManagement.Repository.*;
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 
 import java.util.List;
@@ -30,6 +26,9 @@ public class UserService {
 
     @Autowired
     private MasterRepo masterRepo;
+
+    @Autowired
+    private EventsRepo eventsRepo;
 
     public User registerUser(User user){
         user.setIsblocked(false);
@@ -99,7 +98,8 @@ public class UserService {
             i++;
         }
 
-        //gets the master id to update
+
+        //gets the master id to update master table quantity
         Long masterId=tools.getMaster().getToolId();
 
         int masterQuantity= masterRepo.findQuantityByToolId(masterId);
@@ -127,10 +127,33 @@ public class UserService {
         }
     }
 
-    public String rejectRequest(Long notificationID){
-        notificationsRepo.deleteById(notificationID);
-        return "Notification deleted";
+
+    public void logEvent(Tools tools,String approvalStatus){
+        Events events=new Events();
+        events.setUser(tools.getUser());
+
+        Tuple tuple = userRepository.findNameById(tools.getUser().getId());
+        String userName = tuple.get(1, String.class);
+        events.setUserName(userName);
+
+        String toolName = masterRepo.findToolNameByToolId(tools.getMaster().getToolId());
+        events.setToolName(toolName);
+
+        events.setQuantity(tools.getQuantity());
+
+        events.setDateAccepted(LocalDateTime.now());
+
+        events.setApproval(approvalStatus);
+
+        eventsRepo.save(events);
     }
+
+
+    public void rejectRequest(Long notificationID){
+        notificationsRepo.deleteById(notificationID);
+    }
+
+
 
 }
 
